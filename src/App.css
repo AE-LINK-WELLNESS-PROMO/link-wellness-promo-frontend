@@ -1,0 +1,36 @@
+@import "animate.css";
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Noto Sans Sinhala", sans-serif;
+  src: url("./assets/NotoSansSinhala-VariableFont_wdth\,wght.ttf")
+    format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+.font-sinhala {
+  font-family: "Noto Sans Sinhala", sans-serif;
+  font-weight: bolder;
+}
+
+.noto-sans-sinhala-font {
+  font-family: "Noto Sans Sinhala", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.splash-background {
+  min-height: 100vh;
+  background-image: url("/splash-background.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
+}
