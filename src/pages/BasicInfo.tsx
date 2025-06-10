@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../context/UserInfoContext";
 import { getCurrentUser } from "../services/UserService";
-import { getBasicInformation } from "../services/TokenService";
+import { getBasicInformation, getLanguage } from "../services/TokenService";
+import { STRINGS } from "../common/strings";
 
 function BasicInfo() {
   const { userInfo, setUserInfo } = useUserInfo();
@@ -22,7 +23,7 @@ function BasicInfo() {
       userInfo.heightInches > 11 ||
       !userInfo.gender
     ) {
-      setError("All fields are required.");
+      setError(STRINGS.VALIDATION_ERROR.ALL_FIELDS_REQUIRED[getLanguage()]);
       return;
     }
     // Calculate BMI and update context
@@ -86,7 +87,7 @@ function BasicInfo() {
         >
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
             <label htmlFor="age" className="font-bold">
-              Age
+                {STRINGS.BASIC_INFO.AGE[getLanguage()]}
             </label>
             <div className="relative w-32">
               <select
@@ -110,7 +111,7 @@ function BasicInfo() {
           </div>
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
             <label htmlFor="weight" className="font-bold">
-              Weight (kg)
+               {STRINGS.BASIC_INFO.WEIGHT[getLanguage()]} (Kg)
             </label>
             <div className="relative w-32">
               <select
@@ -133,7 +134,7 @@ function BasicInfo() {
             </div>
           </div>
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
-            <label className="font-bold">Height</label>
+            <label className="font-bold">  {STRINGS.BASIC_INFO.HEIGHT[getLanguage()]}</label>
             <div className="flex gap-2 w-48">
               <div className="relative w-20">
                 <select
@@ -183,7 +184,7 @@ function BasicInfo() {
           </div>
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
             <label htmlFor="gender" className="font-bold">
-              Select Your Gender
+              {STRINGS.BASIC_INFO.SELECT_YOUR_GENDER[getLanguage()]}
             </label>
             <div className="relative w-48">
               <select
@@ -215,7 +216,7 @@ function BasicInfo() {
             type="submit"
             className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-bold rounded-lg text-lg md:text-lg px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full mt-8 md:mt-10 h-15"
           >
-            ඇතුලූවන්න
+            {STRINGS.ENTER[getLanguage()]}
           </button>
         </form>
       </div>

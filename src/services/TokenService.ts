@@ -1,4 +1,5 @@
 const localStorageKey = "374#4$u83link38welness9318";
+const localLanguageStorageKey = "374#4$u83link38welness9318_language";
 
 export const getToken = () =>
   JSON.parse(localStorage.getItem(localStorageKey) || "null");
@@ -24,7 +25,13 @@ export const getBasicInformation = () => {
   return token?.basic_information || null;
 };
 
+export const saveLanguage = (language: number) => {
+  localStorage.setItem(localLanguageStorageKey, JSON.stringify(language));
+};
 
+export const getLanguage = () => {
+  return JSON.parse(localStorage.getItem(localLanguageStorageKey) || "null");
+};
 
 export const getJWT= () => {
   const token = getToken();

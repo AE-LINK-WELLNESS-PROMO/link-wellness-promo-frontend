@@ -3,7 +3,8 @@ import { useUserInfo } from "../context/UserInfoContext";
 import { useNavigate } from "react-router-dom";
 import Popup from "../components/Popup";
 import { createBasicInfo, updateBasicInfo } from "../services/UserService";
-import { getUserDocumentId } from "../services/TokenService";
+import { getLanguage, getUserDocumentId } from "../services/TokenService";
+import { STRINGS } from "../common/strings";
 
 function BmiPage() {
   const { userInfo } = useUserInfo();
@@ -120,7 +121,7 @@ function BmiPage() {
       </div>
       <div className="px-4 md:px-20 w-full max-w-2xl mx-auto flex flex-col items-center animate__animated animate__fadeInUp">
         <h2 className="text-2xl md:text-3xl font-bold text-green-700 text-center mb-2 mt-8 md:mt-10">
-          Your BMI
+          {STRINGS.YOUR_BMI[getLanguage()]}
         </h2>
         <div className="text-6xl md:text-7xl font-extrabold text-green-700 text-center mb-15">
           {bmi}
@@ -191,7 +192,7 @@ function BmiPage() {
         </div>
         <div className="text-center mt-8 mb-2 w-full">
           <div className="text-xl md:text-2xl font-bold text-gray-800 mb-1">
-            Healthy weight for the height:
+            {STRINGS.HEALTHY_BMI_RANGE[getLanguage()]}
           </div>
           <div className="text-2xl md:text-3xl font-bold text-green-700">
             {healthyMin} kg - {healthyMax} kg
@@ -206,7 +207,7 @@ function BmiPage() {
               setShowPopup(true);
             }}
           >
-            What is the BMI?
+             {STRINGS.WHAT_IS_BMI[getLanguage()]}
           </a>
         </div>
         <button
@@ -214,11 +215,11 @@ function BmiPage() {
           type="submit"
           className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-bold rounded-lg text-lg md:text-lg px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full mt-8 md:mt-10 h-15"
         >
-          ඇතුලූවන්න
+          {STRINGS.ENTER[getLanguage()]}
         </button>
         <Popup open={showPopup} onClose={() => setShowPopup(false)}>
           <h3 className="text-xl font-bold mb-2 text-green-700">
-            What is BMI?
+           {STRINGS.WHAT_IS_BMI[getLanguage()]}
           </h3>
           <p className="text-gray-700 mb-2">
             BMI (Body Mass Index) is a value derived from the mass (weight) and

@@ -10,11 +10,23 @@ function getRandomPromo() {
 
 interface WinComponentProps {
   checkWinning: () => void;
+  promoCode?: string; // Optional, to support old code
 }
 
-const WinComponent: React.FC<WinComponentProps> = ({ checkWinning }) => {
+const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) => {
   const [seconds, setSeconds] = useState(0);
-  const [promo] = useState(() => getRandomPromo());
+  const [promo] = useState(() => {
+    // If promoCode is provided, create a custom promo object
+    if (promoCode) {
+      return {
+        code: promoCode,
+        discount: 25, // Fixed 25% discount as shown in the UI
+        expTimeSeconds: 600 // Default expiry time
+      };
+    }
+    // Fall back to random promo if no promoCode provided
+    return getRandomPromo();
+  });
   const [copied, setCopied] = useState(false);
   const apiCalledRef = useRef(false);
 
@@ -95,7 +107,8 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning }) => {
             </span>
           </div>
           <span className="text-5xl md:text-6xl font-extrabold text-yellow-500 mb-2 drop-shadow-lg animate__animated animate__heartBeat animate__infinite animate__slower">
-            {promo.discount}%
+            {/* {promo.discount}% */}
+            25%
           </span>
           <span className="text-lg font-semibold text-green-700 mb-1 animate__animated animate__fadeInUp">
             Discount
