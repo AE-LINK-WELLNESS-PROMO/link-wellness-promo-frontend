@@ -3,6 +3,8 @@ import Lottie from "lottie-react";
 import celebAnimation from "../../public/celeb.json";
 import { promocodes } from "../common/const";
 import { sendWinningPromo } from "../services/WinningService";
+import { STRINGS } from "../common/strings";
+import { getLanguage } from "../services/TokenService";
 
 function getRandomPromo() {
   return promocodes[Math.floor(Math.random() * promocodes.length)];
@@ -56,7 +58,6 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
     const timer = setTimeout(() => setSeconds(seconds - 1), 1000);
     return () => clearTimeout(timer);
   }, [seconds]);
-
   // Helper to format seconds as dd:hh:mm:ss until a fixed expiry date
   function formatTimeToDate(targetDate: Date) {
     const now = new Date();
@@ -79,8 +80,16 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
       .join(":");
   }
 
-  // Set expiry date to 20/06/2025
-  const expiryDate = new Date("2025-06-20T23:59:59");
+  // Calculate the midnight of the following day (12:00 AM tomorrow)
+  const getTomorrowMidnight = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    return tomorrow;
+  };
+  
+  // Set expiry date to midnight (12:00 AM) of the next day
+  const expiryDate = getTomorrowMidnight();
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full p-6  relative overflow-hidden">
@@ -102,8 +111,8 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
       <div className="flex flex-col items-center w-full max-w-md relative z-20">
         <div className="flex flex-col items-center mb-4">
           <div className="relative flex items-center justify-center mb-2">
-            <span className="text-4xl md:text-5xl font-extrabold text-green-700 mb-3 drop-shadow-lg z-10 animate__animated animate__fadeInDown">
-              You Won!
+            <span className={`${getLanguage() == 0 ? "md:text-5xl" : "md:text-xl"} text-4xl  font-extrabold text-green-700 mb-3 drop-shadow-lg z-10 animate__animated animate__fadeInDown`}>
+              {STRINGS.YOU_WON[getLanguage()]}
             </span>
           </div>
           <span className="text-5xl md:text-6xl font-extrabold text-yellow-500 mb-2 drop-shadow-lg animate__animated animate__heartBeat animate__infinite animate__slower">
@@ -111,7 +120,7 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
             25%
           </span>
           <span className="text-lg font-semibold text-green-700 mb-1 animate__animated animate__fadeInUp">
-            Discount
+            {STRINGS.DISCOUNT[getLanguage()]}
           </span>
         </div>
         <div className="flex flex-col items-center  rounded-2xl px-8 py-5 mb-6 relative">
@@ -129,7 +138,7 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
                 strokeLinejoin="round"
               />
             </svg>
-            Promo Code
+            Your Promo Code
           </span>
           <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl px-4 py-2 shadow-inner">
             <span className="text-3xl font-mono font-extrabold text-green-700 tracking-widest select-all drop-shadow-md">
@@ -181,8 +190,7 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
               Copied!
             </span>
           )}
-        </div>
-        <div className="flex flex-col items-center mb-6">
+        </div>        <div className="flex flex-col items-center mb-6">
           <span className="text-base text-gray-600 mb-2">Expires in:</span>
           <div className="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-xl shadow-inner border border-gray-200">
             <span className="text-2xl font-mono font-bold text-green-700 tracking-widest">
@@ -208,10 +216,9 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
                 strokeLinejoin="round"
                 strokeWidth="4"
               />
-            </svg>
-          </div>
+            </svg>          </div>
           <span className="text-xs text-gray-400 mt-1">
-            (Days : Hours : Minutes : Seconds)
+            (Hours : Minutes : Seconds until midnight)
           </span>
         </div>
         <button
@@ -222,7 +229,7 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
           className="focus:outline-none text-white bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 focus:ring-4 focus:ring-green-300 font-bold rounded-full text-xl px-8 py-3 shadow-lg transition-all duration-200 animate__animated animate__pulse animate__infinite"
           style={{ minWidth: 200 }}
         >
-          Go to Store
+          {STRINGS.GO_TO_STORE[getLanguage()]}
         </button>
       </div>
     </div>

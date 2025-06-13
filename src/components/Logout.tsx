@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Popup from "./Popup";
-import { removeToken } from "../services/TokenService";
+import { getLanguage, removeToken } from "../services/TokenService";
+import { STRINGS } from "../common/strings";
 
 interface LogoutProps {
   onLogout?: () => void;
@@ -42,7 +43,7 @@ const Logout: React.FC<LogoutProps> = ({ onLogout }) => {
       <Popup open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col items-center justify-center p-4">
           <span className="text-xl font-bold mb-4">
-            Are you sure you want to logout?
+            {STRINGS.LOGOUT_MESSAGE[getLanguage()]}
           </span>
           <div className="flex gap-4 mt-2">
             <button

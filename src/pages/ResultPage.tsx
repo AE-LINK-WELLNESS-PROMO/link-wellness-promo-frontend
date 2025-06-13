@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../context/UserInfoContext";
 import { createScore } from "../services/QuestionService";
 import { useEffect, useRef } from "react";
-import { getUserDocumentId } from "../services/TokenService";
+import { getLanguage, getUserDocumentId } from "../services/TokenService";
+import { STRINGS } from "../common/strings";
 
 function ResultPage() {
   const navigate = useNavigate();
@@ -42,14 +43,14 @@ function ResultPage() {
 
   function getResultDescription(percent: number) {
     if (percent >= 87)
-      return "Excellent! You are maintaining a very healthy lifestyle. Keep up your great habits and continue to inspire others.";
+      return STRINGS.RESULT_DESCRIPTION.EXCELLENT[getLanguage()];
     if (percent >= 62)
-      return "Great job! You have a healthy lifestyle. Keep building on your good habits for even better wellness.";
+      return STRINGS.RESULT_DESCRIPTION.GREAT[getLanguage()];
     if (percent >= 39)
-      return "You are on the right path. Focus on balanced nutrition, regular exercise, and positive mental health for even more improvement.";
+      return STRINGS.RESULT_DESCRIPTION.GOOD[getLanguage()];
     if (percent >= 14)
-      return "You have started your wellness journey. Try to add more healthy habits and small changes for a better you.";
-    return "Let’s take the first steps together towards a healthier lifestyle. Every small change counts!";
+      return STRINGS.RESULT_DESCRIPTION.FAIR[getLanguage()];
+    return STRINGS.RESULT_DESCRIPTION.NEEDS_IMPROVEMENT[getLanguage()];
   }
 
   return (
@@ -61,8 +62,8 @@ function ResultPage() {
           alt="Logo"
         />
       </div>
-      <p className="text-2xl md:text-4xl font-bold text-green-700 text-center mb-4  md:mt-10 animate__animated animate__fadeInDown">
-        Healthy Lifestyle Test
+      <p className="text-2xl md:text-4xl font-bold text-green-700 text-center mb-4  md:mt-10 animate__animated animate__fadeInDown noto-sans-sinhala-font">
+        {STRINGS.HEALTHY_LIFESTYLE_TEST[getLanguage()]}
       </p>
       <div className="flex flex-col items-center mb-8 animate__animated animate__fadeInDown">
         <div className="relative flex flex-col items-center justify-center mb-4">
@@ -109,12 +110,12 @@ function ResultPage() {
               {percent}%
             </text>
           </svg>
-          <span className="text-lg md:text-2xl font-bold text-green-700">
-            ඔබගේ ලකුණු
+          <span className="text-lg md:text-2xl font-bold text-green-700 noto-sans-sinhala-font">
+            {STRINGS.YOUR_SCORE[getLanguage()]}
           </span>
         </div>
 
-        <div className="text-center max-w-xl mx-auto text-gray-600 text-base md:text-lg mb-2 px-3">
+        <div className="text-center max-w-xl mx-auto text-gray-600 text-base md:text-lg mb-2 px-3 noto-sans-sinhala-font">
           {getResultDescription(percent)}
         </div>
       </div>
@@ -122,9 +123,9 @@ function ResultPage() {
         <button
           onClick={() => navigate("/card-selection")}
           type="button"
-          className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-bold rounded-lg text-lg md:text-lg px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full md:w-1/2 mt-8 md:mt-10 h-15"
+          className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-bold rounded-lg text-lg md:text-lg px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full md:w-1/2 mt-8 md:mt-10 h-15 noto-sans-sinhala-font"
         >
-          ඇතුලූවන්න
+          {STRINGS.SUBMIT[getLanguage()]}
         </button>
       </div>
     </div>

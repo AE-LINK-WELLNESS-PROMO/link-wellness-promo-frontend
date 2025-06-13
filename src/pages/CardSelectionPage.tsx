@@ -5,17 +5,23 @@ import WinComponent from "../components/WinComponent";
 import Logout from "../components/Logout";
 import { checkWinning } from "../services/WinningService";
 import { cardAndPromos } from "../common/const";
+import { STRINGS } from "../common/strings";
+import { getLanguage } from "../services/TokenService";
 
 function CardSelectionPage() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [scratched, setScratched] = useState(false);
   const [alreadyWon, setAlreadyWon] = useState(false);
   const [alreadyWonModal, setAlreadyWonModal] = useState(false);
-  
+
   // State to hold the 4 randomly selected cards and their data
-  const [selectedCardItems, setSelectedCardItems] = useState<typeof cardAndPromos>([]);
-  const [selectedCardData, setSelectedCardData] = useState<(typeof cardAndPromos)[0] | null>(null);
-  
+  const [selectedCardItems, setSelectedCardItems] = useState<
+    typeof cardAndPromos
+  >([]);
+  const [selectedCardData, setSelectedCardData] = useState<
+    (typeof cardAndPromos)[0] | null
+  >(null);
+
   // Function to randomly select 4 cards from the available cards in cardAndPromos
   const getRandomCardItems = () => {
     const shuffled = [...cardAndPromos].sort(() => 0.5 - Math.random());
@@ -43,21 +49,23 @@ function CardSelectionPage() {
       if (!scratched) setAlreadyWonModal(true);
     }
   };
-  
+
   // Get the promo code based on the selected card and current date
-  const getPromoCodeForToday = (cardItem: typeof cardAndPromos[0]) => {
+  const getPromoCodeForToday = (cardItem: (typeof cardAndPromos)[0]) => {
     // Get current date in DD/MM/YYYY format
     const today = new Date();
-    const formattedDate = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
-    
+    const formattedDate = `${String(today.getDate()).padStart(2, "0")}/${String(
+      today.getMonth() + 1
+    ).padStart(2, "0")}/${today.getFullYear()}`;
+
     // Find promo for today's date
-    const todayPromo = cardItem.promo.find(p => p.date === formattedDate);
-    
+    const todayPromo = cardItem.promo.find((p) => p.date === formattedDate);
+
     // If no promo for today, return the one with null date (fallback)
     if (!todayPromo) {
-      return cardItem.promo.find(p => p.date === null)?.code || "NOCODE";
+      return cardItem.promo.find((p) => p.date === null)?.code || "NOCODE";
     }
-    
+
     return todayPromo.code;
   };
 
@@ -77,14 +85,14 @@ function CardSelectionPage() {
           alt="Logo"
         />
       </div>
-      <p className="text-xl md:text-3xl font-bold text-green-700 text-center mb-4 md:mt-5 animate__animated animate__fadeInDown">
-        කැමති කාඩ්පතක් තෝරන්න
+      <p className="text-xl md:text-3xl font-bold text-green-700 text-center mb-4 md:mt-5 animate__animated animate__fadeInDown noto-sans-sinhala-font">
+        {STRINGS.SELECT_CARD[getLanguage()]}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 w-full max-w-md md:max-w-3xl mx-auto md:mt-10">
         {selectedCardItems.map((cardItem, idx) => (
           <div
             key={cardItem.image}
-            className={`rounded-2xl overflow-hidden shadow-md cursor-pointer transition-transform hover:scale-105 relative ${
+            className={`animate__animated animate__headShake animate__delay-${idx+1}s rounded-2xl overflow-hidden shadow-md cursor-pointer transition-transform hover:scale-105 relative ${
               alreadyWon ? "pointer-events-none opacity-60" : ""
             }`}
             style={{
@@ -119,8 +127,8 @@ function CardSelectionPage() {
         ))}
       </div>
       {alreadyWon && (
-        <p className="mt-5 text-sm md:text-2xl font-bold text-red-500 text-center mb-4 md:mt-10 animate__animated animate__fadeInDown">
-          දීමනා සඳහා හෙට නැවත එන්න.
+        <p className="mt-5 text-sm md:text-2xl font-bold text-red-500 text-center mb-4 md:mt-10 animate__animated animate__fadeInDown noto-sans-sinhala-font">
+          {STRINGS.COME_AGAIN[getLanguage()]}
         </p>
       )}
       <Popup
@@ -134,8 +142,8 @@ function CardSelectionPage() {
         {selectedCard !== null && selectedCardData && (
           <div>
             {!scratched && (
-              <p className="text-2xl md:text-4xl font-bold text-green-700 text-center mb-4 md:mt-10 animate__animated animate__fadeInDown">
-                කාඩ්පත සූරන්න
+              <p className="text-2xl md:text-4xl font-bold text-green-700 text-center mb-4 md:mt-10 animate__animated animate__fadeInDown noto-sans-sinhala-font">
+                {STRINGS.SCRATCH_THE_CARD[getLanguage()]}
               </p>
             )}
             <div className="flex justify-center mb-4 mt-8">
@@ -145,15 +153,15 @@ function CardSelectionPage() {
                   onScratchComplete={() => setScratched(true)}
                 />
               ) : (
-                <WinComponent 
-                  checkWinning={() => checkWinningForUserToday()} 
+                <WinComponent
+                  checkWinning={() => checkWinningForUserToday()}
                   promoCode={getPromoCodeForToday(selectedCardData)}
                 />
               )}
             </div>
             {!scratched && (
-              <div className="text-center text-yellow-700 font-semibold text-xs md:text-base mt-2 mb-2 animate__animated animate__fadeInUp mt-5">
-                ඔබේ කාඩ්පත සූරන්න! ඔබට ලැබෙන දීමනාව දැන්ම බලන්න.
+              <div className="text-center text-yellow-700 font-semibold text-xs md:text-base mt-2 mb-2 animate__animated animate__fadeInUp mt-5 noto-sans-sinhala-font">
+                {STRINGS.SCRATCH_DESCRIPTION[getLanguage()]}
               </div>
             )}
           </div>
@@ -167,10 +175,10 @@ function CardSelectionPage() {
       >
         <div className="flex flex-col items-center justify-center p-6">
           <span className="text-2xl md:text-3xl font-bold text-red-600 mb-2 text-center">
-            You have already won today!
+            {STRINGS.ALREADY_WON[getLanguage()]}
           </span>
           <span className="text-lg text-gray-700 mb-4">
-            Come back tomorrow to try again.
+            {STRINGS.COME_AGAIN[getLanguage()]}
           </span>
           <button
             className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg mt-2"

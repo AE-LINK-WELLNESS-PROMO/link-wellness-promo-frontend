@@ -86,7 +86,7 @@ function BasicInfo() {
           onSubmit={handleSubmit}
         >
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
-            <label htmlFor="age" className="font-bold">
+            <label htmlFor="age" className="font-bold noto-sans-sinhala-font">
                 {STRINGS.BASIC_INFO.AGE[getLanguage()]}
             </label>
             <div className="relative w-32">
@@ -110,7 +110,7 @@ function BasicInfo() {
             </div>
           </div>
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
-            <label htmlFor="weight" className="font-bold">
+            <label htmlFor="weight" className="font-bold noto-sans-sinhala-font">
                {STRINGS.BASIC_INFO.WEIGHT[getLanguage()]} (Kg)
             </label>
             <div className="relative w-32">
@@ -134,7 +134,7 @@ function BasicInfo() {
             </div>
           </div>
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
-            <label className="font-bold">  {STRINGS.BASIC_INFO.HEIGHT[getLanguage()]}</label>
+            <label className="font-bold noto-sans-sinhala-font">  {STRINGS.BASIC_INFO.HEIGHT[getLanguage()]}</label>
             <div className="flex gap-2 w-48">
               <div className="relative w-20">
                 <select
@@ -183,7 +183,7 @@ function BasicInfo() {
             </div>
           </div>
           <div className="rounded-xl flex items-center justify-between px-6 py-4 text-lg font-bold border border-gray-400">
-            <label htmlFor="gender" className="font-bold">
+            <label htmlFor="gender" className="font-bold noto-sans-sinhala-font">
               {STRINGS.BASIC_INFO.SELECT_YOUR_GENDER[getLanguage()]}
             </label>
             <div className="relative w-48">

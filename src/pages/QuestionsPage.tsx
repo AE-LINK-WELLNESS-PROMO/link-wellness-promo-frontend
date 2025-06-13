@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useUserInfo } from '../context/UserInfoContext';
 import { useNavigate } from 'react-router-dom';
 import { questions as allQuestions } from '../common/const';
+import { getLanguage } from '../services/TokenService';
+import { STRINGS } from '../common/strings';
 
 function getRandomQuestions(arr: any[], n: number) {
   const shuffled = arr.slice().sort(() => 0.5 - Math.random());
@@ -72,7 +74,7 @@ function QuestionsPage() {
               <span className="bg-green-300 text-green-900 rounded-full min-w-8 h-8 flex items-center justify-center font-extrabold text-md mr-3">
                 {qi + 1}
               </span>
-              <span className="font-bold text-lg md:text-xl text-gray-800">
+              <span className="font-bold text-lg md:text-xl text-gray-800 noto-sans-sinhala-font">
                 {q.question}
               </span>
             </div>
@@ -104,15 +106,15 @@ function QuestionsPage() {
                       style={{ borderRadius: '50%' }}
                     ></span>
                   </span>
-                  <span className={`text-sm break-words max-w-full ${answers[qi] === oi ? 'text-green-600 font-semibold' : 'text-gray-700'}`}>{opt}</span>
+                  <span className={`noto-sans-sinhala-font text-sm break-words max-w-full ${answers[qi] === oi ? 'text-green-600 font-semibold' : 'text-gray-700'}`}>{opt}</span>
                 </label>
               ))}
             </div>
           </div>
         ))}
         <div className="flex justify-center mt-6 mb-2">
-          <span className="text-green-700 font-semibold text-base md:text-lg">
-            {answers.filter(a => a !== null).length} / {answers.length} ප්‍රශ්න සම්පූර්ණයි
+          <span className="noto-sans-sinhala-font text-green-700 font-semibold text-base md:text-lg">
+            {answers.filter(a => a !== null).length} / {answers.length} {STRINGS.FINISH_QUESTIONNAIRE[getLanguage()]}
           </span>
         </div>
         <div className="flex justify-center mt-10">
@@ -124,9 +126,9 @@ function QuestionsPage() {
               allAnswered
                 ? 'bg-green-700 hover:bg-green-800'
                 : 'bg-gray-400 cursor-not-allowed opacity-70'
-            } focus:ring-4 focus:ring-green-300 font-bold rounded-lg text-lg md:text-lg px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full md:w-1/2 mt-8 md:mt-10 h-15 transition-colors duration-200`}
+            } focus:ring-4 focus:ring-green-300 font-bold rounded-lg text-lg md:text-lg px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full md:w-1/2 mt-8 md:mt-10 h-15 transition-colors duration-200 noto-sans-sinhala-font`}
           >
-            Submit
+            {STRINGS.SUBMIT[getLanguage()]}
           </button>
         </div>
       </div>
