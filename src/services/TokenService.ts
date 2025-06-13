@@ -15,6 +15,10 @@ export const getUserId = () => {
   const token = getToken();
   return token?.userId || null;
 };
+export const getMobile = () => {
+  const token = getToken();
+  return token?.mobile || null;
+};
 export const getUserDocumentId = () => {
   const token = getToken();
   return token?.documentId || null;

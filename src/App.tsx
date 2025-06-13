@@ -5,11 +5,15 @@ import LoginPage from "./pages/LoginPage";
 import BasicInfo from "./pages/BasicInfo";
 import BmiPage from "./pages/BmiPage";
 import { UserInfoProvider } from "./context/UserInfoContext";
+import { LoadingProvider, useLoading } from "./context/LoadingContext";
+import LoadingOverlay from "./components/LoadingOverlay";
 import QuestionsPage from "./pages/QuestionsPage";
 import ResultPage from "./pages/ResultPage";
 import CardSelectionPage from "./pages/CardSelectionPage";
 import OtpPage from "./pages/OtpPage";
 import { isAuthenticated } from "./services/TokenService";
+import { useEffect } from "react";
+import { setLoadingStateManager } from "./common/AxiosInstance";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const authed = isAuthenticated();
@@ -29,9 +33,26 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
 }
 
-function App() {
+// Component to initialize loading state manager
+function LoadingStateInitializer() {
+  const { setIsLoading } = useLoading();
+
+  useEffect(() => {
+    // Connect the loading state to axios
+    setLoadingStateManager({ setIsLoading });
+  }, [setIsLoading]);
+
+  return null;
+}
+
+// Component to render the loading overlay
+function AppContent() {
+  const { isLoading } = useLoading();
+  
   return (
-    <UserInfoProvider>
+    <>
+      <LoadingStateInitializer />
+      <LoadingOverlay isLoading={isLoading} />
       <Router>
         <ProtectedRoute>
           <Routes>
@@ -46,7 +67,17 @@ function App() {
           </Routes>
         </ProtectedRoute>
       </Router>
-    </UserInfoProvider>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <LoadingProvider>
+      <UserInfoProvider>
+        <AppContent />
+      </UserInfoProvider>
+    </LoadingProvider>
   );
 }
 

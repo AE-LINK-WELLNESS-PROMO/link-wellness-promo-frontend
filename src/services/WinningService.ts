@@ -1,5 +1,5 @@
 import { axiosInstance, axiosInstanceNoToken } from "../common/AxiosInstance";
-import { getJWT, getToken, getUserDocumentId, getUserId } from "./TokenService";
+import { getJWT, getMobile, getToken, getUserDocumentId, getUserId } from "./TokenService";
 import { API_BASE } from "../common/const";
 
 export const sendWinningPromo = async (promoCode: string) => {
@@ -11,6 +11,7 @@ export const sendWinningPromo = async (promoCode: string) => {
       promocode: promoCode,
       generated_date,
       user: userId,
+      mobile: getMobile()
     });
 
     return response.data;
