@@ -34,7 +34,7 @@ export const saveLanguage = (language: number) => {
 };
 
 export const getLanguage = () => {
-  return JSON.parse(localStorage.getItem(localLanguageStorageKey) || "null");
+  return JSON.parse(localStorage.getItem(localLanguageStorageKey) || "0");
 };
 
 export const getJWT= () => {
