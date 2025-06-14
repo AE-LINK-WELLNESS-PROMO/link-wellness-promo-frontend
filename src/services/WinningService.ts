@@ -1,6 +1,5 @@
-import { axiosInstance, axiosInstanceNoToken } from "../common/AxiosInstance";
-import { getJWT, getMobile, getToken, getUserDocumentId, getUserId } from "./TokenService";
-import { API_BASE } from "../common/const";
+import { axiosInstanceNoToken } from "../common/AxiosInstance";
+import { getMobile, getUserId } from "./TokenService";
 
 export const sendWinningPromo = async (promoCode: string) => {
   const userId = getUserId();

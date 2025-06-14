@@ -27,15 +27,6 @@ export const promocodes = [
   },
 ];
 
-const allCardImages = [
-  "/smahan.png",
-  "/Sp.png",
-  "/Sudantha.png",
-  "/Amurthe.png",
-  "/thripala.jpg",
-  "/kesha.jpg",
-];
-
 export const cardAndPromos = [
   {
     image: "/smahan.png",

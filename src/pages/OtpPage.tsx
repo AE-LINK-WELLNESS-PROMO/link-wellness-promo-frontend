@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { verifyOtp } from "../services/UserService";
 import { getLanguage, saveToken } from "../services/TokenService";
 import { STRINGS } from "../common/strings";
@@ -7,7 +6,6 @@ import { STRINGS } from "../common/strings";
 function OtpPage() {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
