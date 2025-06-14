@@ -11,7 +11,6 @@ function BmiPage() {
   const { weight, heightFeet, heightInches, age, gender } = userInfo;
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
-  const [apiCalled, setApiCalled] = useState(false);
   const apiCalledRef = useRef(false);
 
   useEffect(() => {
@@ -77,7 +76,6 @@ function BmiPage() {
   const updateBMIdata = async () => {
     try {
       console.log("Updating BMI data...");
-      setApiCalled(true);
       if (userInfo.basic_info_id) {
         const updatedUserInfo = {
           data: {

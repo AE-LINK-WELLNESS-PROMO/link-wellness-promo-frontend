@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../context/UserInfoContext";
 import { getCurrentUser } from "../services/UserService";
-import { getBasicInformation, getLanguage } from "../services/TokenService";
+import { getLanguage } from "../services/TokenService";
 import { STRINGS } from "../common/strings";
 
 function BasicInfo() {
@@ -36,18 +36,13 @@ function BasicInfo() {
     navigate("/bmi");
   };
 
-  const basicInfo = getBasicInformation();
-
   useEffect(() => {
     getUserData();
   }, []);
 
-  const [currectBasicInfo, setCurrectBasicInfo] = useState(null);
-
   const getUserData = async () => {
     try {
       const response = await getCurrentUser();
-      setCurrectBasicInfo(response.basic_information);
       if (response?.basic_information) {
         setUserInfo((prev) => ({
           ...prev,

@@ -1,6 +1,5 @@
-import { axiosInstance, axiosInstanceNoToken } from "../common/AxiosInstance";
-import { API_BASE } from "../common/const";
-import { getUserDocumentId, getUserId } from "./TokenService";
+import { axiosInstanceNoToken } from "../common/AxiosInstance";
+import { getUserId } from "./TokenService";
 
 export const login = async (fullName: string, mobile: string) => {
   try {
