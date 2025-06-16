@@ -47,11 +47,15 @@ export const axiosInstanceNoToken = axios.create({
 // Add request interceptors
 axiosInstance.interceptors.request.use(
   (config) => {
-    showLoading();
+    if (!(config as any).skipGlobalLoading) {
+      showLoading();
+    }
     return config;
   },
   (error) => {
-    hideLoading();
+    if (!(error.config && (error.config as any).skipGlobalLoading)) {
+      hideLoading();
+    }
     return Promise.reject(error);
   }
 );
@@ -59,11 +63,15 @@ axiosInstance.interceptors.request.use(
 // Add response interceptors
 axiosInstance.interceptors.response.use(
   (response) => {
-    hideLoading();
+    if (!(response.config as any).skipGlobalLoading) {
+      hideLoading();
+    }
     return response;
   },
   (error) => {
-    hideLoading();
+    if (!(error.config && (error.config as any).skipGlobalLoading)) {
+      hideLoading();
+    }
     return Promise.reject(error);
   }
 );
@@ -71,22 +79,30 @@ axiosInstance.interceptors.response.use(
 // Also add interceptors for axiosInstanceNoToken
 axiosInstanceNoToken.interceptors.request.use(
   (config) => {
-    showLoading();
+    if (!(config as any).skipGlobalLoading) {
+      showLoading();
+    }
     return config;
   },
   (error) => {
-    hideLoading();
+    if (!(error.config && (error.config as any).skipGlobalLoading)) {
+      hideLoading();
+    }
     return Promise.reject(error);
   }
 );
 
 axiosInstanceNoToken.interceptors.response.use(
   (response) => {
-    hideLoading();
+    if (!(response.config as any).skipGlobalLoading) {
+      hideLoading();
+    }
     return response;
   },
   (error) => {
-    hideLoading();
+    if (!(error.config && (error.config as any).skipGlobalLoading)) {
+      hideLoading();
+    }
     return Promise.reject(error);
   }
 );
