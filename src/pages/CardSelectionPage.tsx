@@ -153,9 +153,10 @@ function CardSelectionPage() {
                   onScratchComplete={() => setScratched(true)}
                 />
               ) : (
-                <WinComponent
-                  checkWinning={() => checkWinningForUserToday()}
+                <WinComponent 
+                  checkWinning={() => checkWinningForUserToday()} 
                   promoCode={getPromoCodeForToday(selectedCardData)}
+                  link={selectedCardData.link}
                 />
               )}
             </div>

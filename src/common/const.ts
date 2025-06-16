@@ -1,4 +1,4 @@
-export const API_BASE = "http://localhost:1337/api"; // Change this to your backend API base URL if needed
+export const API_BASE = "https://backend.aeturns.com/api"; // Change this to your backend API base URL if needed
 export const promocodes = [
   {
     code: "10LINKWELNESS",
@@ -30,6 +30,7 @@ export const promocodes = [
 export const cardAndPromos = [
   {
     image: "/smahan.png",
+    link: "https://estore.linknaturalproducts.com/products/samahan%20ayurvedic%20herbal%20tea?size=4g_x_10s",
     promo: [
       { code: "SMS25", date: "14/06/2025" },
       { code: "SMU25", date: "15/06/2025" },
@@ -45,6 +46,7 @@ export const cardAndPromos = [
   },
   {
     image: "/Sp.png",
+       link: "https://estore.linknaturalproducts.com/products/link-natural-sp-balm?size=20g",
     promo: [
       { code: "BLS25", date: "14/06/2025" },
       { code: "BLU25", date: "15/06/2025" },
@@ -60,6 +62,7 @@ export const cardAndPromos = [
   },
   {
     image: "/Sudantha.png",
+       link: "https://estore.linknaturalproducts.com/products/sudantha%20toothpaste%20price?weight=80gx2",
     promo: [
       { code: "SDS25", date: "14/06/2025" },
       { code: "SDU25", date: "15/06/2025" },
@@ -75,6 +78,7 @@ export const cardAndPromos = [
   },
   {
     image: "/Amurthe.png",
+       link: "https://estore.linknaturalproducts.com/products/link-swastha-amurtha-",
     promo: [
       { code: "AMS25", date: "14/06/2025" },
       { code: "AMU25", date: "15/06/2025" },
@@ -90,6 +94,7 @@ export const cardAndPromos = [
   },
   {
     image: "/thripala.jpg",
+       link: "https://estore.linknaturalproducts.com/products/triphala-tablets?tablet-quantity=30_tablets",
     promo: [
       { code: "THS25", date: "14/06/2025" },
       { code: "THU25", date: "15/06/2025" },
@@ -105,6 +110,7 @@ export const cardAndPromos = [
   },
   {
     image: "/kesha.jpg",
+       link: "https://estore.linknaturalproducts.com/products/link-kesha-classic?kesha-classic=50ml",
     promo: [
       { code: "KES25", date: "14/06/2025" },
       { code: "KEU25", date: "15/06/2025" },

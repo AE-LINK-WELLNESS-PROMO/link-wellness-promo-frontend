@@ -13,9 +13,10 @@ function getRandomPromo() {
 interface WinComponentProps {
   checkWinning: () => void;
   promoCode?: string; // Optional, to support old code
+  link?: string;
 }
 
-const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) => {
+const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode, link }) => {
   const [seconds, setSeconds] = useState(0);
   const [promo] = useState(() => {
     // If promoCode is provided, create a custom promo object
@@ -222,9 +223,7 @@ const WinComponent: React.FC<WinComponentProps> = ({ checkWinning, promoCode }) 
           </span>
         </div>
         <button
-          onClick={() =>
-            (window.location.href = "https://estore.linknaturalproducts.com/")
-          }
+          onClick={() => link ? window.location.href = link : window.location.href = "https://estore.linknaturalproducts.com/"}
           type="button"
           className="focus:outline-none text-white bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 focus:ring-4 focus:ring-green-300 font-bold rounded-full text-xl px-8 py-3 shadow-lg transition-all duration-200 animate__animated animate__pulse animate__infinite"
           style={{ minWidth: 200 }}
