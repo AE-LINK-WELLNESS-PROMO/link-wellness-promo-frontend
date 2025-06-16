@@ -33,6 +33,15 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ image, width = 350, height = 
     setScratched(false);
   }, [image, width, height]);
 
+  // Cleanup effect to ensure scroll is re-enabled if component unmounts
+  useEffect(() => {
+    return () => {
+      // Re-enable scroll if component unmounts while scratching
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, []);
+
   const getPointer = (e: React.MouseEvent | React.TouchEvent) => {
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
@@ -61,19 +70,25 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ image, width = 350, height = 
   };
 
   const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
     setIsDrawing(true);
     const { x, y } = getPointer(e);
     scratch(x, y);
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
   };
 
   const handlePointerMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDrawing) return;
+    e.preventDefault();
     const { x, y } = getPointer(e);
     scratch(x, y);
   };
 
   const handlePointerUp = () => {
     setIsDrawing(false);
+    document.body.style.overflow = '';
+    document.body.style.touchAction = '';
     // Check if enough area is scratched
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -91,7 +106,17 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ image, width = 350, height = 
   };
 
   return (
-    <div style={{ position: 'relative', width, height, border: '2px solid #ccc', borderRadius: 16, overflow: 'hidden' }}>
+    <div style={{ 
+      position: 'relative', 
+      width, 
+      height, 
+      border: '2px solid #ccc', 
+      borderRadius: 16, 
+      overflow: 'hidden',
+      touchAction: 'none',
+      userSelect: 'none',
+      WebkitUserSelect: 'none'
+    }}>
       <div style={{ width, height, borderRadius: 16, overflow: 'hidden', position: 'relative' }}>
         {/* The canvas is now the scratchable PNG overlay */}
         {!scratched && (
@@ -99,7 +124,17 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ image, width = 350, height = 
             ref={canvasRef}
             width={width}
             height={height}
-            style={{ position: 'absolute', top: 0, left: 0, borderRadius: 16, cursor: 'pointer', zIndex: 2 }}
+            style={{ 
+              position: 'absolute', 
+              top: 0, 
+              left: 0, 
+              borderRadius: 16, 
+              cursor: 'pointer', 
+              zIndex: 2,
+              touchAction: 'none',
+              userSelect: 'none',
+              WebkitUserSelect: 'none'
+            }}
             onMouseDown={handlePointerDown}
             onMouseMove={handlePointerMove}
             onMouseUp={handlePointerUp}
@@ -107,6 +142,8 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ image, width = 350, height = 
             onTouchStart={handlePointerDown}
             onTouchMove={handlePointerMove}
             onTouchEnd={handlePointerUp}
+            onTouchCancel={handlePointerUp}
+            onContextMenu={(e) => e.preventDefault()}
           />
         )}
         {/* Show revealContent or fallback image when scratched */}
