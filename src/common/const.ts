@@ -142,7 +142,7 @@ export const questions = [
     set: 1,
     question: "ගෝලීය සුවතා දිනය යෙදී ඇත්තේ?",
     answers: ["ජුනි 10", "ජුනි 14", "ජුනි 08"],
-    answerIndex: 2,
+    answerIndex: 1,
   },
   {
     id: 3,
@@ -216,7 +216,7 @@ export const questions = [
     set: 2,
     question: "ගෝලීය සුවතා දිනය යෙදී ඇත්තේ?",
     answers: ["ජුනි 10", "ජුනි 14", "ජුනි 08"],
-    answerIndex: 2,
+    answerIndex: 1,
   },
   {
     id: 13,
@@ -266,7 +266,7 @@ export const questions = [
       "ශරීරයේ උෂ්ණාධික බව සමනය කරයි",
       "Atorvastatin සමග ගත විට රුධිරයේ අහිතකර කොලොස්ට්‍රෝල් මට්ටම පාලනය කරන බවට සායනිකව තහවුරු කර ඇති නිසා",
     ],
-    answerIndex: 2,
+    answerIndex: 1,
   },
   {
     id: 18,
